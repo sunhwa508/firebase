@@ -12,7 +12,9 @@
     "firebase": "^9.18.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "styled-components": "^5.3.9"
+    "react-router-dom": "^6.9.0",
+    "styled-components": "^5.3.9",
+    "vite-tsconfig-paths": "^4.0.7"
   },
   "devDependencies": {
     "@types/react": "^18.0.28",
