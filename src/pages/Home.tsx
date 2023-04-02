@@ -1,75 +1,84 @@
-import { useEffect,  useState } from "react";
 import "./App.css";
-import { db } from '@/firebase-config';
-import {
-    collection,
-    getDocs,
-    addDoc,
-    updateDoc,
-    deleteDoc,
-    doc,
-} from "firebase/firestore";
-function Home() {
-    const [newName, setNewName] = useState("");
-    const [newTeam, setNewTeam] = useState("");
+import styled from "styled-components";
+import Roulette from "@/pages/Roulette/Roulette";
+import React, {useEffect, useState} from "react";
+import {addDoc, collection, getDocs} from "firebase/firestore";
+import {db} from "@/firebase-config";
+import {useLoaderData} from "react-router-dom";
 
-    const [menus, setMenus] = useState<
-        { id: string; name?: string; team?: string }[]
-    >([]);
+const Wrapper = styled.div`
+  display: flex;
+  height: 100vh;
+  flex-direction: column;
+  align-items: center;
+  background-color: lavenderblush;
+  > div {
+    display: flex;
+    gap: 20px;
+    margin-top: 20px;
+    
+    input {
+      height: 32px;
+      font-size: 15px;
+      border-radius: 5px;
+      border: 2px solid #000;
+      padding-left: 10px;
+    }
+  }
+`;
+
+export async function loader () {
     const usersCollectionRef = collection(db, "menus");
+    try {
+        return await getDocs(usersCollectionRef);
+    } catch {
+        throw new Response(null, {
+            status: 500,
+            statusText: 'Internal Server Error',
+        });
+    }
+}
+
+function Home() {
+    const [rouletteData, setRouletteData] = useState<{ id: string; option: string; }[]>([{id:'',option: ''}]);
+    const [newMenu, setNewMenu] = useState("");
+    const [newRestaurant, setNewRestaurant] = useState("");
+    const usersCollectionRef = collection(db, "menus");
+    const docData = useLoaderData();
 
     const createUser = async () => {
-        await addDoc(usersCollectionRef, { name: newName, team: newTeam });
-    };
-
-    const deleteUser = async (id: string) => {
-        const userDoc = doc(db, "menus", id);
-        await deleteDoc(userDoc);
-    };
-
-    const updateUser = async (id: string, team?: string) => {
-        const userDoc = doc(db, "menus", id);
-        const newFields = { team };
-        await updateDoc(userDoc, newFields);
+        await addDoc(usersCollectionRef, { menu: newMenu, restaurant: newRestaurant });
+        setNewMenu('')
+        setNewRestaurant('')
     };
 
     useEffect(() => {
-        const getUsers = async () => {
-            const data = await getDocs(usersCollectionRef);
-            setMenus(data.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-        };
-
-        getUsers();
-    }, [createUser]);
+        // @ts-ignore
+        setRouletteData(docData?.docs.map((doc) =>
+            ({ ...rouletteData, option: doc.data().restaurant, id: doc.id })));
+    }, []);
 
     return (
-        <div className='App'>
-            <input
-                placeholder='Name...'
-                onChange={(event) => {
-                    setNewName(event.target.value);
-                }}
-            />
-            <input
-                placeholder='team...'
-                onChange={(event) => {
-                    setNewTeam(event.target.value);
-                }}
-            />
-            <button onClick={createUser}>Create User</button>
-            {menus.map((menu) => {
-                return (
-                    <div>
-                        <h1>Name: {menu.name}</h1>
-                        <h1>Name: {menu.team}</h1>
-                        <button onClick={() => updateUser(menu.id, menu.team)}>
-                            Change Team
-                        </button>
-                        <button onClick={() => deleteUser(menu.id)}>delete Team</button>
-                    </div>
-                );
-            })}
-        </div>
+        <Wrapper>
+            <div>
+                <input
+                    value={newMenu}
+                    placeholder='메뉴를 입력하세요'
+                    onChange={(event) => {
+                        setNewMenu(event.target.value);
+                    }}
+                />
+                <input
+                    value={newRestaurant}
+                    placeholder='식당이름을 입력하세요'
+                    onChange={(event) => {
+                        setNewRestaurant(event.target.value);
+                    }}
+                />
+                <button disabled={!newMenu || !newRestaurant} onClick={createUser}>메뉴 추가</button>
+            </div>
+            <Roulette data={rouletteData}/>
+        </Wrapper>
     );
 }
 

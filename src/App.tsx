@@ -1,13 +1,16 @@
 
 import "./pages/App.css";
-import Router from "./Router";
-
+import Header from "@/components/Header";
+import React from "react";
+import { Outlet} from "react-router-dom";
 function App() {
   return (
     <>
-      <Router />
+        <Header/>
+        <Outlet />
     </>
   );
 }
+
 
 export default App;
