@@ -19,10 +19,10 @@ export default function ErrorPage() {
 
     return  (
         <Fragment>
-        <header>
-            <h1>{error.statusText || 'ERROR'}</h1>
-        </header>
-        <main>{message}</main>
-    </Fragment>
+            <header>
+                <h1>{error.statusText || 'ERROR'}</h1>
+            </header>
+            <main>{message}</main>
+        </Fragment>
     );
 }

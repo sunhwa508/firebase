@@ -1,9 +1,12 @@
-import React from 'react';
-
 import styled from "styled-components";
 import {NavLink} from "react-router-dom";
 
-const Wrapper = styled.header`
+export const SNavLink = styled(NavLink)`
+  &.active {
+   border-bottom: 12px solid #fff;
+  }
+`;
+export const Wrapper = styled.header`
   display: flex;
   align-items: center;
   height: 86px;
@@ -35,10 +38,9 @@ const Wrapper = styled.header`
       font-size: 1.5em;
       flex-grow: 0.5;
       line-height: 40px;
-      background-color: honeydew;
+      background-color: #fff;
       :nth-of-type(1){
         border-right: 1px solid #000;
-        background-color: lavenderblush;
       }
 
       > a {
@@ -49,17 +51,3 @@ const Wrapper = styled.header`
   }
   
 `;
-
-function Header() {
-    return (
-        <Wrapper>
-            <h1><span>#</span> 점심메뉴<span>.</span>판교</h1>
-            <div>
-                <p><NavLink style={({ isActive }) => ({ borderBottom: isActive && '9px solid lavenderblush'  })} preventScrollReset={true} to="/">뽑기</NavLink></p>
-                <p><NavLink style={({ isActive }) => ({ borderBottom: isActive && '9px solid honeydew' })} preventScrollReset={true} to="/list">목록</NavLink></p>
-            </div>
-        </Wrapper>
-    );
-}
-
-export default Header;

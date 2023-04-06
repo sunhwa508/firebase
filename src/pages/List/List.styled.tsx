@@ -1,12 +1,10 @@
 import styled from "styled-components";
-
-
 export const Wrapper = styled.div`
   display: flex;
   justify-content: center;
-  background-color: honeydew;
   height: 100vh;
-
+  color: #000;
+  
   table{
     height: 200px;
     border-collapse: collapse;

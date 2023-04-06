@@ -1,34 +1,31 @@
-import { useEffect,  useState } from "react";
-import "../App.css";
+import { useState } from "react";
+import "../Home/Home.styled";
 import { db } from '@/firebase-config';
 import {
-    updateDoc,
+    collection,
     deleteDoc,
-    doc,
+    doc, getDocs,
 } from "firebase/firestore";
 import * as S from './List.styled'
 import {useLoaderData} from "react-router-dom";
+import firebase from "firebase/compat";
+
+
 function List() {
-    const lunchList = useLoaderData();
+    const lunchList = useLoaderData() as firebase.firestore.DocumentData;
+    const usersCollectionRef = collection(db, "menus");
     const [menus, setMenus] = useState<
         { id: string; menu?: string; restaurant?: string }[]
-    >([]);
+    >(lunchList.docs.map((doc: any) => ({ ...doc.data(), menu:doc.data().menu,  restaurant: doc.data().restaurant, id: doc.id })));
 
     const deleteUser = async (id: string) => {
-        const userDoc = doc(db, "menus", id);
-        await deleteDoc(userDoc);
+        const menuDoc = doc(db, "menus", id);
+        await deleteDoc(menuDoc);
+
+        const data = await getDocs(usersCollectionRef);
+        setMenus(data?.docs.map((doc) =>
+            ({ ...data, menu:doc.data().menu,  restaurant: doc.data().restaurant, id: doc.id })));
     };
-
-    // const updateUser = async (id: string, team?: string) => {
-    //     const userDoc = doc(db, "menus", id);
-    //     const newFields = { team };
-    //     await updateDoc(userDoc, newFields);
-    // };
-
-    useEffect(() => {
-        // @ts-ignore
-        setMenus(lunchList.docs.map((doc) => ({ ...doc.data(), id: doc.id })));
-    }, []);
 
     return (
         <>

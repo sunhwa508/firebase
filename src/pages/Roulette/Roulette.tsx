@@ -1,12 +1,16 @@
-import React, { useState } from "react";
+import React, {useMemo, useState} from "react";
 import { Wheel } from "react-custom-roulette";
-
+import * as S from './Roulette.styled'
 interface Props{
     data: {id: string, option: string}[]
 }
 function Roulette({data}: Props) {
     const [mustSpin, setMustSpin] = useState(false);
     const [prizeNumber, setPrizeNumber] = useState(0);
+
+    const colorList = useMemo(() =>
+        [...new Array(data.length)].map((_) => "#" + Math.round(Math.random() * 0xffffff).toString(16)),
+        [data]);
 
     const handleSpinClick = () => {
         if (!mustSpin) {
@@ -17,7 +21,7 @@ function Roulette({data}: Props) {
     };
 
     return (
-       <>
+       <S.Wrapper>
         <Wheel
             mustStartSpinning={mustSpin}
             prizeNumber={prizeNumber}
@@ -29,14 +33,7 @@ function Roulette({data}: Props) {
             radiusLineWidth={5}
             textColors={["#ffffff"]}
             fontSize={20}
-            backgroundColors={[
-                "#F22B35",
-                "#F99533",
-                "#24CA69",
-                "#514E50",
-                "#46AEFF",
-                "#9145B7"
-            ]}
+            backgroundColors={colorList}
             onStopSpinning={() => {
                 setMustSpin(false);
             }}
@@ -45,7 +42,7 @@ function Roulette({data}: Props) {
                 SPIN
             </button>
             <br />
-       </>
+       </S.Wrapper>
     );
 }
 export default Roulette;

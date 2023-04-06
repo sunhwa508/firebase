@@ -1,8 +1,8 @@
 
-import "./pages/App.css";
-import Header from "@/components/Header";
+import "./pages/Home/Home.styled";
+import Header from "@/components/Header/Header";
 import React from "react";
-import { Outlet} from "react-router-dom";
+import { Outlet } from "react-router-dom";
 function App() {
   return (
     <>
