@@ -48,8 +48,8 @@ function List() {
 
   return (
     <S.Wrapper>
-      <Window resizable>
-        <WindowHeader>Pokedex.exe</WindowHeader>
+      <Window>
+        <WindowHeader>Pangyu.exe</WindowHeader>
         <WindowContent>
           <Table>
             <TableHead>
@@ -57,7 +57,7 @@ function List() {
                 <TableHeadCell>No</TableHeadCell>
                 <TableHeadCell>Menu</TableHeadCell>
                 <TableHeadCell>Restaurant</TableHeadCell>
-                <TableHeadCell disabled>Level</TableHeadCell>
+                <TableHeadCell disabled>Delete</TableHeadCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -69,7 +69,7 @@ function List() {
                     <TableDataCell>{menu.restaurant}</TableDataCell>
                     <TableDataCell>
                       <button onClick={() => deleteUser(menu.id)}>
-                        delete Team
+                        delete
                       </button>
                     </TableDataCell>
                   </TableRow>

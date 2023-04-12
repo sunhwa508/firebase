@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 import { Wheel } from "react-custom-roulette";
 import * as S from "./Roulette.styled";
 import { Button } from "react95";
@@ -8,14 +8,6 @@ interface Props {
 function Roulette({ data }: Props) {
   const [mustSpin, setMustSpin] = useState(false);
   const [prizeNumber, setPrizeNumber] = useState(0);
-
-  const colorList = useMemo(
-    () =>
-      [...new Array(data.length)].map(
-        (_) => "#" + Math.round(Math.random() * 0xffffff).toString(16)
-      ),
-    [data]
-  );
 
   const handleSpinClick = () => {
     if (!mustSpin) {
@@ -31,14 +23,21 @@ function Roulette({ data }: Props) {
         mustStartSpinning={mustSpin}
         prizeNumber={prizeNumber}
         data={data}
-        outerBorderColor={"#dedede"}
-        outerBorderWidth={10}
-        innerBorderColor={"#dedede"}
-        radiusLineColor={"#dedede"}
+        outerBorderColor={"#fff"}
+        outerBorderWidth={5}
+        fontFamily={"DungGeunMo"}
+        radiusLineColor={"#fff"}
         radiusLineWidth={5}
-        textColors={["#ffffff"]}
-        fontSize={20}
-        backgroundColors={colorList}
+        textColors={["#000"]}
+        backgroundColors={["#CCCCCC"]}
+        pointerProps={{
+          src: "https://o.remove.bg/downloads/eb270a82-72cd-4698-a2a0-479d155be097/cursor-removebg-preview.png",
+          style: {
+            transform: "rotate(-110deg) scale(1.3)",
+            right: 5,
+            top: 50,
+          },
+        }}
         onStopSpinning={() => {
           setMustSpin(false);
         }}

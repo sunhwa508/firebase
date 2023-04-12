@@ -14,6 +14,13 @@ import ms_sans_serif_bold from "react95/dist/fonts/ms_sans_serif_bold.woff2";
 const GlobalStyles = createGlobalStyle`
   ${styleReset}
   @font-face {
+    font-family: 'DungGeunMo';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+  }
+  
+  @font-face {
     font-family: 'ms_sans_serif';
     src: url('${ms_sans_serif}') format('woff2');
     font-weight: 400;
@@ -26,7 +33,7 @@ const GlobalStyles = createGlobalStyle`
     font-style: normal
   }
   body, input, select, textarea {
-    font-family: 'ms_sans_serif';
+    font-family: 'ms_sans_serif',serif;
   }
 `;
 

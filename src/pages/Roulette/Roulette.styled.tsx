@@ -7,6 +7,9 @@ export const Wrapper = styled.div`
   align-items: center;
   width: 100vw;
 
+  img {
+    filter: grayscale(100%);
+  }
   > button {
     border-radius: 8px;
     padding: 0.6em 1.2em;

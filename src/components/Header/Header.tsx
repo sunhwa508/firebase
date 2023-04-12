@@ -11,8 +11,9 @@ import {
 import { Link } from "react-router-dom";
 function Header() {
   const [open, setOpen] = useState(false);
+
   return (
-    <AppBar>
+    <AppBar style={{ zIndex: 100 }}>
       <Toolbar style={{ justifyContent: "space-between" }}>
         <div style={{ position: "relative", display: "inline-block" }}>
           <Button
@@ -22,7 +23,7 @@ function Header() {
           >
             <img
               src={""}
-              alt="react95 logo"
+              alt="PANGYU MATDORI"
               style={{ height: "20px", marginRight: 4 }}
             />
             Start
@@ -33,6 +34,7 @@ function Header() {
                 position: "absolute",
                 left: "0",
                 top: "100%",
+                width: "150px",
               }}
               onClick={() => setOpen(false)}
             >
@@ -66,15 +68,6 @@ function Header() {
         </div>
       </Toolbar>
     </AppBar>
-    // <S.Wrapper>
-    //     <h1><span>#</span> 점심메뉴<span>.</span>판교</h1>
-    //     <div>
-    //         <p><S.SNavLink preventScrollReset={true}
-    //                     to="/">뽑기</S.SNavLink></p>
-    //         <p><S.SNavLink preventScrollReset={true}
-    //                     to="/list">목록</S.SNavLink></p>
-    //     </div>
-    // </S.Wrapper>
   );
 }
 

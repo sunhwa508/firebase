@@ -7,6 +7,7 @@ export const Wrapper = styled.div`
   align-items: center;
   background: ${({ theme }) => theme.desktopBackground};
   margin-top: 45px;
+  font-family: "DungGeunMo", serif;
 
   > button {
     border-radius: 8px;
