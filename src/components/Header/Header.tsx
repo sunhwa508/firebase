@@ -9,6 +9,7 @@ import {
   Toolbar,
 } from "react95";
 import { Link } from "react-router-dom";
+import logoIMG from "./logo.png";
 function Header() {
   const [open, setOpen] = useState(false);
 
@@ -22,7 +23,7 @@ function Header() {
             style={{ fontWeight: "bold" }}
           >
             <img
-              src={""}
+              src={logoIMG}
               alt="PANGYU MATDORI"
               style={{ height: "20px", marginRight: 4 }}
             />
