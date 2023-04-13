@@ -38,24 +38,22 @@ function Header() {
               }}
               onClick={() => setOpen(false)}
             >
-              <MenuListItem>
-                <span role="img" aria-label="👨‍💻">
-                  👨‍💻
-                </span>
-                <Link preventScrollReset={true} to="/">
-                  {" "}
+              <Link preventScrollReset={true} to="/">
+                <MenuListItem style={{ cursor: "pointer" }}>
+                  <span role="img" aria-label="👨‍💻">
+                    👨‍💻
+                  </span>{" "}
                   Roulette
-                </Link>
-              </MenuListItem>
-              <MenuListItem>
-                <span role="img" aria-label="📁">
-                  📁
-                </span>
-                <Link preventScrollReset={true} to="/List">
-                  {" "}
+                </MenuListItem>
+              </Link>
+              <Link preventScrollReset={true} to="/List">
+                <MenuListItem style={{ cursor: "pointer" }}>
+                  <span role="img" aria-label="📁">
+                    📁
+                  </span>{" "}
                   My List
-                </Link>
-              </MenuListItem>
+                </MenuListItem>
+              </Link>
               <Separator />
               <MenuListItem disabled>
                 <span role="img" aria-label="🔙">

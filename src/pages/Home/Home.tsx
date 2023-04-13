@@ -58,6 +58,7 @@ function Home() {
         <TextInput
           value={newMenu}
           placeholder="메뉴를 입력하세요"
+          disabled={rouletteData.length > 20}
           onChange={(event) => {
             event.preventDefault();
             setNewMenu(event.target.value);
@@ -66,6 +67,7 @@ function Home() {
         <TextInput
           value={newRestaurant}
           placeholder="식당이름을 입력하세요"
+          disabled={rouletteData.length > 20}
           onChange={(event) => {
             event.preventDefault();
             setNewRestaurant(event.target.value);

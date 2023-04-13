@@ -6,4 +6,8 @@ export const Wrapper = styled.div`
   min-height: 100vh;
   background: ${({ theme }) => theme.desktopBackground};
   font-family: "DungGeunMo", serif;
+  > div {
+    margin-top: 70px;
+    min-height: 70vh;
+  }
 `;

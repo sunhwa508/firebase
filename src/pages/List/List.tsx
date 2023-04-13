@@ -33,7 +33,7 @@ function List() {
 
   const deleteUser = async (id: string) => {
     const menuDoc = doc(db, "menus", id);
-    await deleteDoc(menuDoc);
+    await deleteDoc(menuDoc).then(() => alert("삭제되었습니다"));
 
     const data = await getDocs(usersCollectionRef);
     setMenus(
