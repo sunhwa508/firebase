@@ -21,6 +21,7 @@ export async function loader() {
 }
 
 function Home() {
+  const MAX_MENUS = 30;
   const lunchList = useLoaderData() as firebase.firestore.DocumentData;
   const [rouletteData, setRouletteData] = useState<
     { id: string; option: string }[]
@@ -58,7 +59,7 @@ function Home() {
         <TextInput
           value={newMenu}
           placeholder="메뉴를 입력하세요"
-          disabled={rouletteData.length > 20}
+          disabled={rouletteData.length > MAX_MENUS}
           onChange={(event) => {
             event.preventDefault();
             setNewMenu(event.target.value);
@@ -67,7 +68,7 @@ function Home() {
         <TextInput
           value={newRestaurant}
           placeholder="식당이름을 입력하세요"
-          disabled={rouletteData.length > 20}
+          disabled={rouletteData.length > MAX_MENUS}
           onChange={(event) => {
             event.preventDefault();
             setNewRestaurant(event.target.value);
