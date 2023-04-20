@@ -23,7 +23,9 @@ function Roulette({ data }: Props) {
       <Wheel
         mustStartSpinning={mustSpin}
         prizeNumber={prizeNumber}
-        data={data}
+        data={
+          data.length === 0 ? [{ option: "메뉴가 없습니다", id: "" }] : data
+        }
         outerBorderColor={"#fff"}
         outerBorderWidth={5}
         fontFamily={"DungGeunMo"}
@@ -43,7 +45,7 @@ function Roulette({ data }: Props) {
           setMustSpin(false);
         }}
       />
-      <Button variant="raised" size="lg" onClick={handleSpinClick}>
+      <Button variant='raised' size='lg' onClick={handleSpinClick}>
         SPIN
       </Button>
 

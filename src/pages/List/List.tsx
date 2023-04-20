@@ -21,12 +21,13 @@ function List() {
   const lunchList = useLoaderData() as firebase.firestore.DocumentData;
   const usersCollectionRef = collection(db, "menus");
   const [menus, setMenus] = useState<
-    { id: string; menu?: string; restaurant?: string }[]
+    { id: string; menu?: string; restaurant?: string; type?: string }[]
   >(
     lunchList.docs.map((doc: any) => ({
       ...doc.data(),
       menu: doc.data().menu,
       restaurant: doc.data().restaurant,
+      type: doc.data().type,
       id: doc.id,
     }))
   );
@@ -41,6 +42,7 @@ function List() {
         ...data,
         menu: doc.data().menu,
         restaurant: doc.data().restaurant,
+        type: doc.data().type,
         id: doc.id,
       }))
     );
@@ -55,6 +57,7 @@ function List() {
             <TableHead>
               <TableRow>
                 <TableHeadCell>No</TableHeadCell>
+                <TableHeadCell>Type</TableHeadCell>
                 <TableHeadCell>Menu</TableHeadCell>
                 <TableHeadCell>Restaurant</TableHeadCell>
                 <TableHeadCell disabled>Delete</TableHeadCell>
@@ -65,6 +68,7 @@ function List() {
                 return (
                   <TableRow key={menu.id}>
                     <TableDataCell>{index + 1}</TableDataCell>
+                    <TableDataCell>{menu.type}</TableDataCell>
                     <TableDataCell>{menu.menu}</TableDataCell>
                     <TableDataCell>{menu.restaurant}</TableDataCell>
                     <TableDataCell>
